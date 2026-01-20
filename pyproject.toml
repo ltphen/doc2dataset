@@ -1,0 +1,104 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "doc2dataset"
+version = "0.1.0"
+description = "Transform documents into LLM fine-tuning datasets using AI-powered knowledge extraction"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "Lionel Tatkeu", email = "tatkeulionel@gmail.com" }
+]
+keywords = [
+    "llm",
+    "fine-tuning",
+    "dataset",
+    "knowledge-extraction",
+    "pdf",
+    "documents",
+    "machine-learning",
+    "nlp",
+    "training-data",
+    "data-augmentation",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: General",
+]
+dependencies = [
+    "numpy>=1.21.0",
+    "tiktoken>=0.5.0",
+    "tqdm>=4.60.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+pdf = ["pymupdf>=1.23.0"]
+docx = ["python-docx>=1.0.0"]
+openai = ["openai>=1.0.0"]
+anthropic = ["anthropic>=0.18.0"]
+litellm = ["litellm>=1.0.0"]
+langdetect = ["langdetect>=1.0.9"]
+huggingface = ["huggingface-hub>=0.20.0", "datasets>=2.0.0"]
+all = [
+    "pymupdf>=1.23.0",
+    "python-docx>=1.0.0",
+    "openai>=1.0.0",
+    "anthropic>=0.18.0",
+    "litellm>=1.0.0",
+    "langdetect>=1.0.9",
+    "huggingface-hub>=0.20.0",
+    "datasets>=2.0.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/ltphen/doc2dataset"
+Documentation = "https://github.com/ltphen/doc2dataset#readme"
+Repository = "https://github.com/ltphen/doc2dataset"
+Issues = "https://github.com/ltphen/doc2dataset/issues"
+
+[project.scripts]
+doc2dataset = "doc2dataset.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["doc2dataset"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
